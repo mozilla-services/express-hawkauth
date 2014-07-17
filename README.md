@@ -1,7 +1,8 @@
 # Hawk authentication for ExpressJS
 
-This module provides an authentication middleware for express applications.
-More specifically, for applications which uses the connect middleware facility.
+This module provides an [Hawk](https://github.com/hueniverse/hawk)
+authentication middleware for express applications.  More specifically, for
+applications which uses the connect middleware facility.
 
 Hawk itself does not provide any mechanism for obtaining or transmitting the
 set of shared credentials required, but this project proposes a scheme we use
