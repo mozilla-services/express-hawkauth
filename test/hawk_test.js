@@ -128,6 +128,7 @@ describe("hawk middleware", function() {
         .post('/require-or-create-session')
         .expect(200)
         .end(function(err, res) {
+          if (err) throw err;
           expect(createSessionArguments).to.not.be.undefined;
           expect(res.header['hawk-session-token']).to.not.be.undefined;
           done();
