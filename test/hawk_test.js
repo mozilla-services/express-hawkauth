@@ -4,13 +4,14 @@
 /* jshint expr: true */
 "use strict";
 
+var express = require("express");
 var expect = require("chai").expect;
 var addHawk = require("superagent-hawk");
 var supertest = addHawk(require("supertest"));
 
-var app = require("../loop").app;
-var hawk = require("../loop/hawk");
-var Token = require("../loop/token").Token;
+var hawk = require("../lib/hawk");
+var Token = require("../lib/token").Token;
+var app = express();
 
 describe("hawk middleware", function() {
 
@@ -40,21 +41,39 @@ describe("hawk middleware", function() {
   };
 
   app.post('/require-session',
-    hawk.getMiddleware({}, _getExistingSession, setUser),
+    hawk.getMiddleware({
+      hawkOptions: {},
+      getSession: _getExistingSession,
+      setUser: setUser
+    }),
     ok_200
   );
   app.post('/require-or-create-session',
-    hawk.getMiddleware({}, _getExistingSession, _createSession, setUser),
+    hawk.getMiddleware({
+      hawkOptions: {}, 
+      getSession: _getExistingSession,
+      createSession: _createSession,
+      setUser: setUser
+    }),
     ok_200
   );
 
   app.post('/require-invalid-session',
-    hawk.getMiddleware({}, _getNonExistingSession, setUser),
+    hawk.getMiddleware({
+      hawkOptions: {},
+      getSession: _getNonExistingSession,
+      setUser: setUser
+    }),
     ok_200
   );
 
   app.post('/require-or-create-invalid-session',
-    hawk.getMiddleware({}, _getNonExistingSession, _createSession, setUser),
+    hawk.getMiddleware({
+      hawkOptions: {},
+      getSession: _getNonExistingSession,
+      createSession: _createSession,
+      setUser: setUser
+    }),
     ok_200
   );
 
