@@ -14,8 +14,7 @@
   },
   "dependencies": {
     "hawk": "2.2.1",
-    "hkdf": "0.0.2",
-    "atob": "1.1.2"
+    "hkdf": "0.0.2"
   },
   "devDependencies": {
     "chai": "1.9.x",
