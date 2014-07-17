@@ -9,7 +9,7 @@ accross mozilla-services projects.
 
 ## Installation
 
-    npm install express-hawk
+    npm install express-hawkauth
 
 ## How do I plug that in my application?
 
@@ -17,7 +17,7 @@ In order to plug express-hawk in your application, you'll need to use it as
 a middleware.
 
     var express = require("express");
-    var hawk = require("express-hawk");
+    var hawk = require("express-hawkauth");
     app = express();
 
     var hawkMiddleware = hawk.getMiddleware({
