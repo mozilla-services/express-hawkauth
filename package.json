@@ -2,7 +2,7 @@
   "author": "Mozilla Services",
   "name": "express-hawkauth",
   "description": "Hawk authentication for the express framework",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "homepage": "https://github.com/mozilla-services/express-hawkauth",
   "repository": {
     "type": "git",
