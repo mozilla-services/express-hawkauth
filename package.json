@@ -1,0 +1,35 @@
+{
+  "author": "Mozilla Services",
+  "name": "express-hawkauth",
+  "description": "Hawk authentication for the express framework",
+  "version": "0.0.1",
+  "homepage": "https://github.com/mozilla-services/express-hawkauth",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mozilla-services/express-hawkauth.git"
+  },
+  "main": "lib/hawk.js",
+  "engines": {
+    "node": ">=0.4.7"
+  },
+  "dependencies": {
+    "hawk": "2.2.1",
+    "hkdf": "0.0.2",
+    "atob": "1.1.2"
+  },
+  "devDependencies": {
+    "chai": "1.9.x",
+    "mocha": "1.13.0",
+    "express": "3.x",
+    "supertest": "0.10.x",
+    "superagent-hawk": "git://github.com/CrowdProcess/superagent-hawk.git#69ee9c"
+  },
+  "scripts": {
+    "test": "mocha -R spec"
+  },
+  "bugs": "https://github.com/mozilla-services/express-hawkauth/issues",
+  "licenses": {
+    "type": "MPL-2.0",
+    "url": "https://raw.github.com/mozilla-services/express-hawkauth/master/LICENSE"
+  }
+}
