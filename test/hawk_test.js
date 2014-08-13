@@ -36,7 +36,7 @@ describe("hawk middleware", function() {
     res.json(200);
   };
 
-  var setUser = function(req, res, tokenId, done) {
+  var setUser = function(req, res, credentials, done) {
     done();
   };
 

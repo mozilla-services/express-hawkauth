@@ -37,11 +37,13 @@ a middleware.
         // Argument returned is a potential error.
         cb(null);
       },
-      setUser: function(req, res, tokenId, cb) {
-        // A function that uses req and res, the hawkId when they're known so
-        // that it can tweak it. For instance, you can store the tokenId as the
-        // user.
-        req.user = tokenId;
+      setUser: function(req, res, credentials, cb) {
+
+        // A function that uses req and res and the credentials so
+        // that it can tweak it. For instance, you can store the tokenId
+        // as the user.
+
+        req.user = credentials.id;
       }
     });
 
