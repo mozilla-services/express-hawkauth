@@ -1,5 +1,8 @@
 # Hawk authentication for ExpressJS
 
+[![Build Status](https://travis-ci.org/mozilla-services/express-hawkauth.svg?branch=master)]
+(https://travis-ci.org/mozilla-services/express-hawkauth)
+
 This module provides an [Hawk](https://github.com/hueniverse/hawk)
 authentication middleware for express applications.  More specifically, for
 applications which uses the connect middleware facility.
