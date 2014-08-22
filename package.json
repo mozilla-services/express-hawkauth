@@ -19,7 +19,7 @@
   "devDependencies": {
     "chai": "1.9.x",
     "mocha": "1.13.0",
-    "express": "4.x",
+    "express": "3.x",
     "supertest": "0.10.x",
     "superagent-hawk": "0.0.4"
   },
