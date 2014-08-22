@@ -33,12 +33,24 @@ describe("hawk middleware", function() {
   };
 
   var ok_200 = function(req, res) {
-    res.json(200);
+    res.status(200).json();
   };
 
   var setUser = function(req, res, credentials, done) {
     done();
   };
+
+  var router = express.Router();
+  router.get('/require-session',
+    hawk.getMiddleware({
+      hawkOptions: {},
+      getSession: _getExistingSession,
+      setUser: setUser
+    }),
+    ok_200
+  );
+
+  app.use("/router", router);
 
   app.post('/require-session',
     hawk.getMiddleware({
@@ -98,6 +110,14 @@ describe("hawk middleware", function() {
     it("should accept a valid hawk session", function(done) {
       supertest(app)
         .post('/require-session')
+        .hawk(credentials)
+        .expect(200)
+        .end(done);
+    });
+
+    it("should accept a valid hawk session behind a router", function(done) {
+      supertest(app)
+        .get('/router/require-session')
         .hawk(credentials)
         .expect(200)
         .end(done);
