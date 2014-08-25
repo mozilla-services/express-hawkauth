@@ -33,7 +33,7 @@ describe("hawk middleware", function() {
   };
 
   var ok_200 = function(req, res) {
-    res.status(200).json();
+    res.status(200).json({"key": "value"});
   };
 
   var setUser = function(req, res, credentials, done) {
@@ -113,7 +113,12 @@ describe("hawk middleware", function() {
         .post('/require-session')
         .hawk(credentials)
         .expect(200)
-        .end(done);
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if (err) throw err;
+          expect(res.body).to.eql({key: "value"});
+          done();
+        });
     });
 
     (router ? it : it.skip)("should accept a valid hawk session behind a router", function(done) {
@@ -129,9 +134,7 @@ describe("hawk middleware", function() {
         .post('/require-invalid-session')
         .hawk(credentials)
         .expect(401)
-        .end(function(err, res) {
-          done();
-        });
+        .end(done);
     });
 
     it("should 400 on malformed headers", function(done) {
