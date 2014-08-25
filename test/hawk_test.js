@@ -33,12 +33,25 @@ describe("hawk middleware", function() {
   };
 
   var ok_200 = function(req, res) {
-    res.json(200);
+    res.status(200).json({"key": "value"});
   };
 
   var setUser = function(req, res, credentials, done) {
     done();
   };
+
+  var router = express.Router();
+  if (router) {
+    router.get('/require-session',
+      hawk.getMiddleware({
+        hawkOptions: {},
+        getSession: _getExistingSession,
+        setUser: setUser
+      }),
+      ok_200
+    );
+    app.use("/router", router);
+  }
 
   app.post('/require-session',
     hawk.getMiddleware({
@@ -100,6 +113,19 @@ describe("hawk middleware", function() {
         .post('/require-session')
         .hawk(credentials)
         .expect(200)
+        .expect('Content-Type', /json/)
+        .end(function(err, res) {
+          if (err) throw err;
+          expect(res.body).to.eql({key: "value"});
+          done();
+        });
+    });
+
+    (router ? it : it.skip)("should accept a valid hawk session behind a router", function(done) {
+      supertest(app)
+        .get('/router/require-session')
+        .hawk(credentials)
+        .expect(200)
         .end(done);
     });
 
@@ -108,9 +134,7 @@ describe("hawk middleware", function() {
         .post('/require-invalid-session')
         .hawk(credentials)
         .expect(401)
-        .end(function(err, res) {
-          done();
-        });
+        .end(done);
     });
 
     it("should 400 on malformed headers", function(done) {
